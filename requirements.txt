@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pandas
+openpyxl
+httpx
+pydantic
+supabase
+groq

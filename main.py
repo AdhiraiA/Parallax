@@ -180,7 +180,7 @@ async def call_llm(prompt: str, expect_json: bool = False) -> Optional[str]:
                     "Content-Type": "application/json"
                 }
                 body = {
-                    "model": "llama-3.3-70b-versatile",
+                    "model": "llama-3.1-8b-instant",
                     "messages": [
                         {"role": "system", "content": "You are a professional automotive diagnostic master technician."},
                         {"role": "user", "content": prompt}
@@ -276,10 +276,10 @@ def fetch_and_record_history(make: str, model: str, dtc: str, symptoms: str) -> 
 
     if supabase:
         try:
-            # Query past instances
+            # Query past instances using vehicle_id column
             response = supabase.table("vehicle_history_logs")\
                 .select("id, created_at")\
-                .eq("vehicle_key", vehicle_key)\
+                .eq("vehicle_id", vehicle_key)\
                 .eq("dtc_code", dtc_clean)\
                 .execute()
             
@@ -289,9 +289,9 @@ def fetch_and_record_history(make: str, model: str, dtc: str, symptoms: str) -> 
                 occurrences = count + 1
                 last_logged_at = response.data[-1].get("created_at")
 
-            # Insert new telemetry entry
+            # Insert new telemetry entry using vehicle_id column
             supabase.table("vehicle_history_logs").insert({
-                "vehicle_key": vehicle_key,
+                "vehicle_id": vehicle_key,
                 "make": make,
                 "model": model,
                 "dtc_code": dtc_clean,

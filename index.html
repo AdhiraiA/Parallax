@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parallax | Autonomous Vehicle Diagnostics</title>
+  <title>Autonomous Vehicle Error Detection & Diagnostic System</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -20,12 +20,12 @@
           <i class="fa-solid fa-gauge-high"></i>
         </div>
         <div>
-          <h1 class="text-lg font-bold">PARALLAX <span class="text-xs text-blue-400 font-semibold px-2 py-0.5 bg-blue-500/10 border border-blue-500/20 rounded">Diagnostic Core</span></h1>
-          <p class="text-[11px] text-slate-400">Priority Engine • History Ledger • Cost Estimator</p>
+          <h1 class="text-lg font-bold">VEHICLE FAULT & ERROR DETECTION SYSTEM <span class="text-xs text-blue-400 font-semibold px-2 py-0.5 bg-blue-500/10 border border-blue-500/20 rounded">Live Diagnostic Engine</span></h1>
+          <p class="text-[11px] text-slate-400">Intelligent Priority Analysis • Recurrence History Ledger • Cost Estimator</p>
         </div>
       </div>
       <span class="text-xs font-mono px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-full flex items-center gap-1.5">
-        <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span> Engine Ready
+        <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span> Cloud System Online
       </span>
     </div>
   </header>
@@ -125,7 +125,7 @@
   </main>
 
   <script>
-    const API_BASE = "http://localhost:8000";
+    const API_BASE = "https://parallax-backend-1vyg.onrender.com";
 
     function loadScenario(make, model, dtcs, symptoms) {
       document.getElementById("make").value = make;
@@ -138,7 +138,7 @@
     document.getElementById("diagForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       const btn = document.getElementById("submitBtn");
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Processing...`;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Analyzing Fault Codes...`;
       btn.disabled = true;
 
       const payload = {
@@ -157,7 +157,7 @@
         const data = await res.json();
         renderResults(data);
       } catch (err) {
-        alert("Server unreachable. Ensure uvicorn is running on port 8000.");
+        alert("Server unreachable. Ensure the cloud backend is active.");
       } finally {
         btn.innerHTML = `<i class="fa-solid fa-play"></i> Run Diagnostic Engine`;
         btn.disabled = false;
